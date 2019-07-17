@@ -1,0 +1,33 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - my app</title>
+      {% else %}
+      <title>Welcome to my app</title>
+      {% endif %}
+    </head>
+    <body>
+        <div id='breadcrumb'>
+            <a href=''>/</a>
+            {% block breadcrumb %}{% endblock %}
+        </div>
+        <sidebar>Index:
+          <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+          </ul>
+        </sidebar>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <div id='content'>
+          {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
